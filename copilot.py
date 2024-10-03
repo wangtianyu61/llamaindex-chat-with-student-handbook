@@ -2,10 +2,7 @@
 from openai import OpenAI
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
-from weather_api import get_n_day_weather_forecast
 from tenacity import retry, wait_random_exponential, stop_after_attempt
-import json
-import IPython;
 @retry(wait=wait_random_exponential(multiplier=1, max=40), stop=stop_after_attempt(5))
 def chat_completion_request(client, messages, model="gpt-4o",
                             **kwargs):
