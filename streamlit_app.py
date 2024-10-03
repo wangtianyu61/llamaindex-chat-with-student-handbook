@@ -11,8 +11,6 @@ st.write(
 )
 
 openai_key = os.getenv("OPENAI_API_KEY")
-if not openai_key:
-    openai_key = st.secrets.openai_key
 
 if not openai_key: ### get openai key from user input
     openai_api_key = st.text_input("Please enter your OpenAI API Key", type="password")
