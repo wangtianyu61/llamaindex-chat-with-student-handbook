@@ -52,7 +52,7 @@ class Copilot:
 
             Please answer the question based on the retrieved information. If the question is not related to Columbia University, please tell the user and ask for a question related to Columbia University.
 
-            Please highlight the information and format the answer in markdown.
+            Please highlight the information with bold text and bullet points.
         """
         
         processed_query = processed_query_prompt.format(question=question, 
