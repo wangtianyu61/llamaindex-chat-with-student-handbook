@@ -17,8 +17,6 @@ if not openai_api_key: ### get openai key from user input
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.", icon="🗝️")
 else:
-    st.title("Chat with Columbia Copilot 💬🦙")
-
     if "messages" not in st.session_state.keys():  # Initialize the chat messages history
         st.session_state.messages = [
             {"role": "assistant", "content": "I am Columbia Copilot, your personal assistant. You can ask me about Columbia University."}
@@ -62,9 +60,3 @@ else:
                 answer = st.write_stream(generate())
 
             st.session_state.messages.append({"role": "assistant", "content": answer})
-
-            # response_stream = st.session_state.chat_copilot.ask(prompt, messages=st.session_state.messages[:-1])
-            # st.write_stream(response_stream.response_gen)
-            # message = {"role": "assistant", "content": response_stream.response}
-            # # Add response to message history
-            # st.session_state.messages.append(message)
