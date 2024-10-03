@@ -1,10 +1,10 @@
 import streamlit as st
 import openai
 from copilot import Copilot
-
+import os
 st.set_page_config(page_title="Chat with Columbia Copilot", layout="centered", initial_sidebar_state="auto", menu_items=None)
 ### set openai key, first check if it is in environment variable, if not, check if it is in streamlit secrets, if not, raise error
-import os
+
 
 st.write(
     "To use this app, you need to provide an OpenAI API key, which you can get [here](https://platform.openai.com/account/api-keys). "
@@ -15,7 +15,7 @@ openai_key = os.getenv("OPENAI_API_KEY")
 if not openai_key: ### get openai key from user input
     openai_api_key = st.text_input("Please enter your OpenAI API Key", type="password")
     if not openai_key:
-        raise st.info("Please add your OpenAI API key to continue.", icon="🗝️")
+        st.info("Please add your OpenAI API key to continue.", icon="🗝️")
 
 openai.api_key = openai_key
 st.title("Chat with Columbia Copilot 💬🦙")
