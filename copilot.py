@@ -19,7 +19,7 @@ def chat_completion_request(client, messages, model="gpt-4o",
         return e
 
 class Copilot:
-    def __init__(self):
+    def __init__(self, key):
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
         embedding_model = HuggingFaceEmbedding(
@@ -31,7 +31,7 @@ class Copilot:
                         similarity_top_k=3
                         )
 
-        self.llm_client = OpenAI()
+        self.llm_client = OpenAI(api_key = key)
         
         self.system_prompt = """
             You are an expert on Columbia University and your job is to answer questions 

@@ -1,5 +1,4 @@
 import streamlit as st
-import openai
 from copilot import Copilot
 import os
 ### set openai key, first check if it is in environment variable, if not, check if it is in streamlit secrets, if not, raise error
@@ -18,7 +17,6 @@ if not openai_api_key: ### get openai key from user input
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.", icon="🗝️")
 else:
-    openai.api_key = openai_api_key
     st.title("Chat with Columbia Copilot 💬🦙")
 
     if "messages" not in st.session_state.keys():  # Initialize the chat messages history
@@ -28,7 +26,7 @@ else:
 
     @st.cache_resource
     def load_copilot():
-        return Copilot()
+        return Copilot(key = openai_api_key)
 
 
 
