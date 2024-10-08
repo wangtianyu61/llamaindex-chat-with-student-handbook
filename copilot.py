@@ -3,6 +3,7 @@ from openai import OpenAI
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from tenacity import retry, wait_random_exponential, stop_after_attempt
+import os
 @retry(wait=wait_random_exponential(multiplier=1, max=40), stop=stop_after_attempt(5))
 def chat_completion_request(client, messages, model="gpt-4o",
                             **kwargs):
@@ -67,7 +68,11 @@ class Copilot:
         return retrieved_info, response
 
 if __name__ == "__main__":
-    copilot = Copilot()
+    ### get openai key from user input
+    openai_api_key = os.getenv("OPENAI_API_KEY")
+    if not openai_api_key:
+        openai_api_key = input("Please enter your OpenAI API Key (or set it as an environment variable OPENAI_API_KEY): ")
+    copilot = Copilot(key = openai_api_key)
     messages = []
     while True:
         question = input("Please ask a question: ")

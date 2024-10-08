@@ -1,11 +1,12 @@
 # 🦙📚 Columbia Copilot
 
-Columbia Copilot is an AI-powered chatbot designed to answer questions about Columbia University. It leverages the capabilities of OpenAI's GPT-4 and LlamaIndex to provide accurate and contextually relevant responses based on the data it has been trained on.
+Columbia Copilot is an AI-powered chatbot designed to answer questions about Columbia University. It leverages the capabilities of OpenAI's GPT-4o and LlamaIndex to provide accurate and contextually relevant responses based on the data it has been trained on.
 
 ## Overview of the App
 
 - Takes user queries via Streamlit's `st.chat_input` and displays both user queries and model responses with `st.chat_message`.
-- Uses LlamaIndex to load and index data and create a chat engine that will retrieve context from that data to respond to each user query.
+- Use `Copilot` class to interact with the chatbot by passing in a question and a list of messages and get a response.
+- Uses LlamaIndex to load and index data and create a Retriever to retrieve context from that data to respond to each user query.
 
 ## Demo App
 
