@@ -24,7 +24,7 @@ else:
 
     @st.cache_resource
     def load_copilot():
-        return Copilot(key = openai_api_key)
+        return Copilot()
 
 
 
@@ -44,7 +44,7 @@ else:
     if st.session_state.messages[-1]["role"] != "assistant":
         with st.chat_message("assistant"):
 
-            retrived_info, answer = st.session_state.chat_copilot.ask(prompt, messages=st.session_state.messages[:-1])
+            retrived_info, answer = st.session_state.chat_copilot.ask(prompt, messages=st.session_state.messages[:-1], openai_key=openai_api_key)
             ### answer can be a generator or a string
 
             #print(retrived_info)

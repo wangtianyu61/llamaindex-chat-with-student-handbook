@@ -20,7 +20,7 @@ def chat_completion_request(client, messages, model="gpt-4o",
         return e
 
 class Copilot:
-    def __init__(self, key):
+    def __init__(self):
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
         embedding_model = HuggingFaceEmbedding(
@@ -31,15 +31,16 @@ class Copilot:
         self.retriever = self.index.as_retriever(
                         similarity_top_k=3
                         )
-
-        self.llm_client = OpenAI(api_key = key)
         
         self.system_prompt = """
             You are an expert on Columbia University and your job is to answer questions 
             about the university.
         """
 
-    def ask(self, question, messages):
+    def ask(self, question, messages, openai_key=None):
+        ### initialize the llm client
+        self.llm_client = OpenAI(api_key = openai_key)
+
         ### use the retriever to get the answer
         nodes = self.retriever.retrieve(question)
         ### make answer a string with "1. <>, 2. <>, 3. <>"
@@ -72,11 +73,11 @@ if __name__ == "__main__":
     openai_api_key = os.getenv("OPENAI_API_KEY")
     if not openai_api_key:
         openai_api_key = input("Please enter your OpenAI API Key (or set it as an environment variable OPENAI_API_KEY): ")
-    copilot = Copilot(key = openai_api_key)
+    copilot = Copilot()
     messages = []
     while True:
         question = input("Please ask a question: ")
-        retrived_info, answer = copilot.ask(question, messages=messages)
+        retrived_info, answer = copilot.ask(question, messages=messages, openai_key=openai_api_key)
         ### answer can be a generator or a string
 
         #print(retrived_info)
